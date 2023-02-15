@@ -1,17 +1,23 @@
 function ProjectFactory(name, id)
 {
-  const todos = {};
+  const todos = [];
   const add = (todo) =>
   {
+    const tierIndex = this.todos.indexOf(x => x.tier == todo.tier);
+    tierIndex == 0 ? todos.unshift(todo) : this._addTodo(todo, tierIndex);
 
+    return tierIndex;
   }
 
-  return {name, todos, id, add};
-}
+  const _addTodo = (todo, index) =>
+  {
+    const subTodos = todos.splice(index);
+    todos.push(todo);
 
-function addAtop(arr, todo,)
-{
+    todos.concat(subTodos);
+  }
 
+  return {name, id, todos, add};
 }
 
 module.exports = ProjectFactory;
