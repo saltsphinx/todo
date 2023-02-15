@@ -38,7 +38,7 @@ function ProjectFactory(name, id)
     todos.concat(subTodos);
   }
 
-  return {name, id, todos, add};
+  return {name, id, todos, add, toggleTodo};
 }
 
 module.exports = ProjectFactory;
