@@ -1,6 +1,7 @@
 function ProjectFactory(name, id)
 {
   const todos = [];
+  
   const add = (todo, index) =>
   {
     let tierIndex = index ? index : this.todos.indexOf(x => x.tier == todo.tier);
