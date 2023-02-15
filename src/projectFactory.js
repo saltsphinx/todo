@@ -1,7 +1,7 @@
 function ProjectFactory(name, id)
 {
   const todos = [];
-  
+
   const add = (todo, index) =>
   {
     let tierIndex = index ? index : this.todos.indexOf(x => x.tier == todo.tier);
@@ -10,9 +10,14 @@ function ProjectFactory(name, id)
     return tierIndex;
   }
 
-  const toggleTodo = (todoId) =>
+  const remove = (todoID) =>
   {
-    const todo = this.todos.splice(todos.findIndex(x => x.id == todoId), 1)[0];
+    return todo = this.todos.splice(todos.findIndex(x => x.id == todoID), 1)[0];
+  }
+
+  const toggleTodo = (todoID) =>
+  {
+    const todo = remove(todoID);
     todo.toggle();
 
     const tierIndex = this.todos.indexOf(x => x.tier == todo.tier);
