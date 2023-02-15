@@ -20,12 +20,12 @@ const removeProject = (projectName) =>
 {
   const projectIndex = _checkName(projectName);
 
-  if (!projectIndex)
+  if (typeof projectIndex === false)
   {
     return false;
   }
 
-  projects.splice(projectIndex, 0);
+  projects.splice(projectIndex, 1);
 }
 
 const addTodo = (projectName, name, description, dueDate, tier) =>
