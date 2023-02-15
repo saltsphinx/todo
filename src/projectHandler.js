@@ -3,25 +3,22 @@ const todoFactory = require('./todoFactory');
 
 const projects = [];
 
-const addProject = (name) =>
+const addProject = (projectName) =>
 {
-  let id;
-
-  do
+  if (projects.length > 0 && typeof _checkName(projectName) == 'number')
   {
-    id = [name, Math.ceil(Math.random() * 10000)];
+    return false;
   }
-  while (_checkID(id));
 
-  const project = projectFactory(name, id);
+  const project = projectFactory(projectName);
   projects.push(project);
 
-  return id.join();
+  return projectName;
 }
 
-const removeProject = (id) =>
+const removeProject = (projectName) =>
 {
-  const projectIndex = _checkID(id);
+  const projectIndex = _checkName(projectName);
 
   if (!projectIndex)
   {
@@ -31,9 +28,9 @@ const removeProject = (id) =>
   projects.splice(projectIndex, 0);
 }
 
-const addTodo = (projectID, name, description, dueDate, tier) =>
+const addTodo = (projectName, name, description, dueDate, tier) =>
 {
-  const projectIndex = _checkID(projectID);
+  const projectIndex = _checkName(projectName);
 
   if (!projectIndex)
   {
@@ -41,15 +38,8 @@ const addTodo = (projectID, name, description, dueDate, tier) =>
   }
 
   const project = projects[projectIndex];
-  let id;
 
-  do
-  {
-    id = [name, Math.ceil(Math.random() * 10000)];
-  }
-  while (_checkID(id, project.todos));
-
-  const todo = todoFactory(name, id, description, dueDate, tier);
+  const todo = todoFactory(name, description, dueDate, tier);
   return project.add(todo);
 }
 
@@ -58,10 +48,18 @@ const removeTodo = (projectID, todoID) =>
 
 }
 
-function _checkID(id, arr = projects)
+function _checkName(projectName, arr = projects)
 {
-  const IDs = arr.map(x => x.id);
-  return IDs.map(id => id.join()).findIndex(id.join());
+  const names = projects.map(project => project.name);
+  const index = names.findIndex(name => name == projectName);
+  console.log(index);
+
+  if (index >= 0)
+  {
+    return index
+  }
+
+  return false;
 }
 
 module.exports = {addProject, removeProject, addTodo, removeTodo, projects};
