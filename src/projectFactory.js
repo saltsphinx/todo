@@ -13,20 +13,21 @@ function ProjectFactory(name)
   }
 
   //removes todo and returns it
-  const remove = (todoName) =>
+  const remove = (todoName, active) =>
   {
-    const todoIndex = todos.findIndex(todo => todo.name == todoName);
+    const todoIndex = active ? todos.findIndex(todo => todo.name == todoName) : inactive.findIndex(todo => todo.name == todoName);
+     
 
     if (todoIndex >= 0)
     {
-      return todos.splice(todoIndex, 1)[0];
+      return todoIndex = active ? todos.splice(todoIndex, 1)[0] : inactive.splice(todoIndex, 1)[0];
     }
   }
 
   //toggles todo's active property. returns nothing if todo doesnt exist, returns index if todo is actived and returns 'inactive' if its been deactived
-  const toggle = (todoName) =>
+  const toggle = (todoName, active) =>
   {
-    const todo = remove(todoName);
+    const todo = remove(todoName, active);
 
     if (!todo)
     {
@@ -35,10 +36,18 @@ function ProjectFactory(name)
 
     const toggleResult = todo.active = !todo.active;
 
-    return toggleResult ? add(todo) : 'inactive';
+    if (toggleResult)
+    {
+      return add(todo);
+    }
+    else
+    {
+      inactive.unshift(todo);
+      return 'inactive';
+    }
   }
 
-  return {name, todos, add, remove, toggleTodo};
+  return {name, todos, inactive, add, remove, toggle};
 }
 
 module.exports = ProjectFactory;
