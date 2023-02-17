@@ -7,20 +7,19 @@ function ProjectFactory(name)
   const add = (todo) =>
   {
     todos.push(todo);
-    todos.sort();
+    todos.sort((a, b) => a.tier < b.tier);
 
-    return todos.findIndex(todo);
+    return todos.indexOf(todo);
   }
 
   //removes todo and returns it
   const remove = (todoName, active) =>
   {
     const todoIndex = active ? todos.findIndex(todo => todo.name == todoName) : inactiveTodos.findIndex(todo => todo.name == todoName);
-     
 
     if (todoIndex >= 0)
     {
-      return todoIndex = active ? todos.splice(todoIndex, 1)[0] : inactiveTodos.splice(todoIndex, 1)[0];
+      return active ? todos.splice(todoIndex, 1)[0] : inactiveTodos.splice(todoIndex, 1)[0];
     }
   }
 
