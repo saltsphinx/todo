@@ -1,7 +1,7 @@
 function ProjectFactory(name)
 {
   const todos = [];
-  const inactive = [];
+  const inactiveTodos = [];
 
   // Adds todo object to todos array in the appreiate tier/place in array. Returns index todo was placed in
   const add = (todo) =>
@@ -15,12 +15,12 @@ function ProjectFactory(name)
   //removes todo and returns it
   const remove = (todoName, active) =>
   {
-    const todoIndex = active ? todos.findIndex(todo => todo.name == todoName) : inactive.findIndex(todo => todo.name == todoName);
+    const todoIndex = active ? todos.findIndex(todo => todo.name == todoName) : inactiveTodos.findIndex(todo => todo.name == todoName);
      
 
     if (todoIndex >= 0)
     {
-      return todoIndex = active ? todos.splice(todoIndex, 1)[0] : inactive.splice(todoIndex, 1)[0];
+      return todoIndex = active ? todos.splice(todoIndex, 1)[0] : inactiveTodos.splice(todoIndex, 1)[0];
     }
   }
 
@@ -42,12 +42,12 @@ function ProjectFactory(name)
     }
     else
     {
-      inactive.unshift(todo);
+      inactiveTodos.unshift(todo);
       return 'inactive';
     }
   }
 
-  return {name, todos, inactive, add, remove, toggle};
+  return {name, todos, inactiveTodos, add, remove, toggle};
 }
 
 module.exports = ProjectFactory;
