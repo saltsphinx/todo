@@ -1,50 +1,44 @@
-function ProjectFactory(name, id)
+function ProjectFactory(name)
 {
   const todos = [];
+  const inactive = [];
 
-  const add = (todo, index) =>
+  // Adds todo object to todos array in the appreiate tier/place in array. Returns index todo was placed in
+  const add = (todo) =>
   {
-    let tierIndex = index ? index : this.todos.indexOf(x => x.tier == todo.tier);
-    tierIndex == 0 ? todos.unshift(todo) : this._addTodo(todo, tierIndex);
-
-    return tierIndex;
-  }
-
-  const remove = (todoID) =>
-  {
-    return todo = this.todos.splice(todos.findIndex(x => x.id == todoID), 1)[0];
-  }
-
-  const toggleTodo = (todoID) =>
-  {
-    const todo = remove(todoID);
-    todo.toggle();
-
-    const tierIndex = this.todos.indexOf(x => x.tier == todo.tier);
-
-    if (todo.active)
-    {
-      this.add(todo, tierIndex);
-      return tierIndex;
-    }
-    else
-    {
-      const inactiveIndex = this.todos.indexOf(x => x.active == false);
-      _addTodo(todo, inactiveIndex);
-
-      return inactiveIndex;
-    }
-  }
-
-  const _addTodo = (todo, index) =>
-  {
-    const subTodos = todos.splice(index);
     todos.push(todo);
+    todos.sort();
 
-    todos.concat(subTodos);
+    return todos.findIndex(todo);
   }
 
-  return {name, id, todos, add, remove, toggleTodo};
+  //removes todo and returns it
+  const remove = (todoName) =>
+  {
+    const todoIndex = todos.findIndex(todo => todo.name == todoName);
+
+    if (todoIndex >= 0)
+    {
+      return todos.splice(todoIndex, 1)[0];
+    }
+  }
+
+  //toggles todo's active property. returns nothing if todo doesnt exist, returns index if todo is actived and returns 'inactive' if its been deactived
+  const toggle = (todoName) =>
+  {
+    const todo = remove(todoName);
+
+    if (!todo)
+    {
+      return;
+    }
+
+    const toggleResult = todo.active = !todo.active;
+
+    return toggleResult ? add(todo) : 'inactive';
+  }
+
+  return {name, todos, add, remove, toggleTodo};
 }
 
 module.exports = ProjectFactory;
