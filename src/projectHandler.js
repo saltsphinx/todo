@@ -5,7 +5,7 @@ const projects = [];
 
 const addProject = (projectName) =>
 {
-  if (projects.length > 0 && typeof _checkName(projectName) == 'number')
+  if (projects.length > 0 && _getIndex(projectName) >= 0)
   {
     return false;
   }
@@ -18,28 +18,25 @@ const addProject = (projectName) =>
 
 const removeProject = (projectName) =>
 {
-  const projectIndex = _checkName(projectName);
+  const projectIndex = _getIndex(projectName);
 
-  if (typeof projectIndex === false)
+  if (projectIndex >= 0)
   {
-    return false;
+    projects.splice(projectIndex, 1);
   }
-
-  projects.splice(projectIndex, 1);
 }
 
 const addTodo = (projectName, todoName, description, dueDate, tier) =>
 {
-  const projectIndex = _checkName(projectName);
+  const projectIndex = _getIndex(projectName);
 
-  if (projectIndex === false)
+  if (projectIndex < 0)
   {
     return false;
   }
-
   const project = projects[projectIndex];
 
-  if (project.todos.length > 0 && typeof _checkName(todoName, project.todos) == 'number')
+  if (project.todos.length > 0 && _getIndex(todoName, project.todos) >= 0)
   {
     return false;
   }
@@ -48,23 +45,27 @@ const addTodo = (projectName, todoName, description, dueDate, tier) =>
   return project.add(todo);
 }
 
-const removeTodo = (projectID, todoID) =>
+const removeTodo = (projectName, todoName, active) =>
 {
+  const projectIndex = _getProjectIndex(projectName);
 
-}
-
-function _checkName(name, arr = projects)
-{
-  const names = projects.map(project => project.name);
-  const index = names.findIndex(x => x == name);
-  console.log(index);
-
-  if (index >= 0)
+  if (projectIndex)
   {
-    return index
+    return false;
   }
 
-  return false;
+  const project = projects[projectIndex];
+
+  project.remove(todoName, active)
+}
+
+// returns index of project or todo if name para is found, returns nothing if it isnt present in arr
+// returns -1 if name isnt found
+function _getIndex(name, arr = projects)
+{
+  const names = arr.map(x => x.name);
+
+  return index = names.indexOf(name);
 }
 
 module.exports = {addProject, removeProject, addTodo, removeTodo, projects};
