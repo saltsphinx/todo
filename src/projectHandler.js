@@ -45,9 +45,15 @@ const addTodo = (projectName, todoName, description, dueDate, tier) =>
   return project.add(todo);
 }
 
+const changeTodo = (projectName, todoName, newTodoName, description, dueDate, tier, active = true) =>
+{
+  removeTodo(projectName, todoName, active);
+  return addTodo(projectName, newTodoName, description, dueDate, tier);
+}
+
 const removeTodo = (projectName, todoName, active) =>
 {
-  const projectIndex = _getProjectIndex(projectName);
+  const projectIndex = _getIndex(projectName);
 
   if (projectIndex)
   {
@@ -56,7 +62,7 @@ const removeTodo = (projectName, todoName, active) =>
 
   const project = projects[projectIndex];
 
-  project.remove(todoName, active)
+  return project.remove(todoName, active);
 }
 
 // returns index of project or todo if name para is found, returns nothing if it isnt present in arr
@@ -68,4 +74,4 @@ function _getIndex(name, arr = projects)
   return index = names.indexOf(name);
 }
 
-module.exports = {addProject, removeProject, addTodo, removeTodo, projects};
+module.exports = {addProject, removeProject, addTodo, changeTodo, removeTodo, projects};
