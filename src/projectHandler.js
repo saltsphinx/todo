@@ -5,7 +5,7 @@ const projects = [];
 
 const addProject = (projectName) =>
 {
-  if (projects.length > 0 && _getIndex(projectName) >= 0)
+  if (projects.length > 0 && _getIndex(projectName) == -1)
   {
     return false;
   }
