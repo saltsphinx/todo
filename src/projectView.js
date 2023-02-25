@@ -34,4 +34,4 @@ function loadView(node)
   node.classList.add('selected');
 }
 
-module.exports = { createProjectTemplate, loadView};
+module.exports = { createProjectTemplate, loadView, selected };
