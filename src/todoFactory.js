@@ -1,8 +1,8 @@
-function todoFactory(name, id, description, dueDate, tier)
+function todoFactory(name, description, dueDate, tier)
 {
-  const toggle = () => !this.active;
+  const toggle = () => this.active = this.active == true ? false : true;
   
-  return {name, description, dueDate, tier, id, toggle, active: true};
+  return {name, description, dueDate, tier, toggle, active: true};
 }
 
 module.exports = todoFactory;

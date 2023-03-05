@@ -5,7 +5,8 @@ const projects = [];
 
 const addProject = (projectName) =>
 {
-  if (projects.length > 0 && _getIndex(projectName) == -1)
+  projectName = projectName.replaceAll(' ', '-');
+  if (projects.length > 0 && _getIndex(projectName) >= 0)
   {
     return false;
   }
@@ -14,6 +15,11 @@ const addProject = (projectName) =>
   projects.push(project);
 
   return projectName;
+}
+
+const getProject = (projectName) =>
+{
+  return projects.find((project => project.name == projectName));
 }
 
 const removeProject = (projectName) =>
@@ -28,41 +34,47 @@ const removeProject = (projectName) =>
 
 const addTodo = (projectName, todoName, description, dueDate, tier) =>
 {
-  const projectIndex = _getIndex(projectName);
+  const project = getProject(projectName)
 
-  if (projectIndex < 0)
+  if (!project)
   {
-    return false;
+    return;
   }
-  const project = projects[projectIndex];
 
-  if (project.todos.length > 0 && _getIndex(todoName, project.todos) >= 0)
+  todoName = todoName.replaceAll(' ', '-');
+
+  if (project.todos.length > 0 && _getIndex(todoName, project.todos) >= 0 || _getIndex(todoName, project.inactiveTodos) >= 0)
   {
     return false;
   }
 
   const todo = todoFactory(todoName, description, dueDate, tier);
-  return project.add(todo);
-}
-
-const changeTodo = (projectName, todoName, newTodoName, description, dueDate, tier, active = true) =>
-{
-  removeTodo(projectName, todoName, active);
-  return addTodo(projectName, newTodoName, description, dueDate, tier);
+  const todoIndex = project.add(todo);
+  return todoIndex;
 }
 
 const removeTodo = (projectName, todoName, active) =>
 {
-  const projectIndex = _getIndex(projectName);
+  const project = getProject(projectName)
 
-  if (projectIndex)
+  if (!project)
   {
-    return false;
+    return;
   }
 
-  const project = projects[projectIndex];
-
   return project.remove(todoName, active);
+}
+
+const toggleTodo = (projectName, todoName, active) =>
+{
+  const project = getProject(projectName)
+
+  if (!project)
+  {
+    return;
+  }
+
+  return project.toggle(todoName, active);
 }
 
 // returns index of project or todo if name para is found, returns nothing if it isnt present in arr
@@ -74,4 +86,4 @@ function _getIndex(name, arr = projects)
   return index = names.indexOf(name);
 }
 
-module.exports = {addProject, removeProject, addTodo, changeTodo, removeTodo, projects};
+module.exports = {addProject, removeProject, toggleTodo, addTodo, removeTodo, getProject, projects};

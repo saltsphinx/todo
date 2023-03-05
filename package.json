@@ -4,7 +4,7 @@
   "description": "Project provided by [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",

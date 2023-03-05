@@ -14,3 +14,4 @@ Seperate the code by functionality: Dom related modules that generate and keeps 
 Data related modules that create objects, keeps track of all the projects and their todos, quaries to remove projects and todos, sorts todos based on prority.
 
 Factory functions for projects and todos. Projects, title, todo list object for tracking todos, length of list. Todos, title, description, dueDate and priority, complete. If the todo is past its date, it should automatically be checked as complete.
+

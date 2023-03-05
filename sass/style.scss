@@ -1,3 +1,274 @@
+$main-background: #f6f8fc;
+$selected-background: #d4e9ff;
+$cancel-red: #ee6969;
+
+@mixin resetCSS()
+{
+  margin: 0;
+}
+
+@mixin button($color)
+{
+  &:hover
+  {
+    background: darken($color, 5%);
+  }
+  &:active
+  {
+    background: darken($color, 8%);
+  }
+}
+
+html, body, main
+{
+  height: 100%;
+  background: $main-background;
+}
+
+h2, body, p
+{
+  @include resetCSS();
+}
+
 body
 {
+  
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+main
+{
+  display: flex;
+
+  .header
+  {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: 0.2rem 0;
+  }
+}
+
+h2
+{
+  font-size: 0.8rem;
+  font-weight: 600;
+  user-select: none;
+}
+
+.projects
+{
+  display: flex;
+  flex-direction: column;
+  width: 12rem;
+  margin-right: 2rem;
+
+  h2
+  {
+    padding-left: 0.2rem;
+  }
+}
+
+.add-button
+{
+  padding: 0 0.2rem;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 15px;
+
+  @include button($main-background);
+}
+
+.project
+{
+  padding: 0.2rem;
+  cursor: pointer;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  @include button($main-background);
+  p
+  {
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: center;
+    user-select: none;
+  }
+
+  &.selected
+  {
+    background: $selected-background;
+    p
+    {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: rgb(34, 33, 30);
+    }
+  
+    @include button($selected-background);
+  }
+}
+
+.project-form
+{
+  display: flex;
+  flex-direction: column;
+
+  .project-form-header
+  {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+    width: 100%;
+  }
+}
+
+.exit-form
+{
+  padding: 0 0.2rem;
+  cursor: pointer;
+  color: $cancel-red;
+}
+
+.todos
+{
+  
+
+  .wrapper
+  {
+    height: 100%;
+    width: 50rem;
+    padding: 0.6rem;
+    border-radius: 20px 20px 0 0;
+    background: lighten($main-background, 20%);
+  }
+
+  .header
+  {
+    padding-left: 1rem;
+  }
+}
+
+.todo-form
+{
+  width: fit-content;
+  label,
+  input
+  {
+    padding: 0.1rem;
+    display: block;
+  }
+
+  input[type='submit']
+  {
+    display: inline;
+  }
+
+  .input-wrapper
+  {
+    display: flex;
+    gap: 0.2rem;
+
+    >div
+    {
+      display: flex;
+      flex-direction: column;
+
+      .todo-tier
+      {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  }
+
+  textarea
+  {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 0.4rem;
+  }
+}
+
+
+.todo-form
+{
+  &.create legend:after
+  {
+    content: 'Add todo';
+  }
+
+  &.updating legend:after
+  {
+    content: 'Update todo';
+  }
+
+  &.updating
+  {
+    .delete-todo
+    {
+      display: inline;
+    }
+  }
+}
+
+.todo
+{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  button
+  {
+    margin-right: 1rem;
+    height: 5px;
+    width: 5px;
+    padding: 0.4rem;
+  }
+
+  .name
+  {
+    margin-right: 1rem;
+  }
+
+  .due-date
+  {
+
+  }
+
+  &.red
+  {
+    .name
+    {
+      font-weight: 700;
+    }
+  }
+
+  &.inactive
+  {
+    background: $main-background;
+    color: #aaa;
+
+    .active-button
+    {
+      background: #aaa;
+    }
+
+    .delete-todo-button
+    {
+      display: block;
+      margin-left: 1rem;
+      color: $cancel-red;
+    }
+  }
+}
+
+.hidden
+{
+  display: none;
+}
+
+.guide
+{
+  
 }

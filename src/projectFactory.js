@@ -7,7 +7,7 @@ function ProjectFactory(name)
   const add = (todo) =>
   {
     todos.push(todo);
-    todos.sort((a, b) => a.tier < b.tier);
+    todos.sort((a, b) => a.tier >= b.tier);
 
     return todos.indexOf(todo);
   }
@@ -27,15 +27,14 @@ function ProjectFactory(name)
   const toggle = (todoName, active) =>
   {
     const todo = remove(todoName, active);
-
     if (!todo)
     {
       return;
     }
 
-    const toggleResult = todo.active = !todo.active;
+    todo.active = !todo.active;
 
-    if (toggleResult)
+    if (todo.active === true)
     {
       return add(todo);
     }
