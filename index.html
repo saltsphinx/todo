@@ -5,17 +5,67 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.min.css">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <script src="./main.js" defer></script>
+  <title>Todo App</title>
 </head>
 <body>
-  <div class="projects">
-    <h2>projects</h2>
-    <div class="wrapper"></div>
-  </div>
-  <div class="todos">
-    <h2>todos</h2>
-    <div class="wrapper"></div>
-  </div>
-  <div class="guide"></div>
+  <main>
+    <div class="projects">
+      <div class="header">
+        <h2>projects</h2>
+        <p class="material-symbols-outlined add-button projects-button">Add</p>
+      </div>
+      <form class="project-form hidden" onsubmit="return false;">
+        <div class="project-form-header">
+          <label for="project-name">Project name:</label>
+          <span class="exit-form exit-project-form">x</span>
+        </div>
+        <input id="project-name" placeholder="eg. Workout Plan" type="text" maxlength="16" required>
+      </form>
+      <div class="wrapper"></div>
+    </div>
+    <div class="todos">
+      <div class="header">
+        <h2>todos</h2>
+        <p class="material-symbols-outlined add-button todos-button">Add</p>
+        <p class="remove-project-button">Remove Project</p>
+      </div>
+      <div class="wrapper">
+        <form class="todo-form hidden" onsubmit="return false;">
+          <fieldset>
+            <legend></legend>
+            <div class="input-wrapper">
+              <div class="todo-name">
+                <label for="todo-name">Name:</label>
+                <input id="todo-name" type="text" required minlength="3" maxlength="24">
+              </div>
+              <div class="todo-due-date">
+                <label for="todo-due-date">Due date:</label>
+                <input type="date" id="todo-due-date" required>
+              </div>
+              <div class="todo-tier">
+                <div class="todo-tier">
+                  <label for="todo-tier">Priority:</label>
+                  <span class="exit-form exit-todo-form">x</span>
+                </div>
+                <select id="todo-tier" required>
+                  <option value="0">Important</option>
+                  <option value="1" selected>Regular</option>
+                  <option value="2">Low</option>
+                </select>
+              </div>
+            </div>
+            <label for="todo-description">Description:</label>
+            <textarea id="todo-description"></textarea>
+            <div class="buttons">
+              <input class="todo-form-button" type="submit" value="Submit">
+              <button class="delete-todo todo-form-button hidden" type="button">Delete todo</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
