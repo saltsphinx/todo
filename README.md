@@ -1,6 +1,8 @@
 # todo
 Project provided by [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-todo-list)
 
+# [Live Deployment](https://saltsphinx.github.io/todo/)
+
 Meant to put the learners newly-found knowledge of OOP, ES6 modules, factory functions and similiar patterns to use. This module of the course delved deep into the unique
 aspects of JS that make it the whacky but fun and open-ended langauge that it is.
 
